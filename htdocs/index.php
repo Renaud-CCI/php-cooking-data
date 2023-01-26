@@ -113,16 +113,24 @@ echo ("<br>");
 echo ("<br>");
 
     // * Quelle est la catégorie de films la plus représentée ?
-// $categories = [];
-// foreach($top as $items){
-//     if (in_array($categories[$items["category"]["attributes"]["term"]], $categories)){
-//         echo "ok";
-//     } else {
-//         $categories[$items["category"]["attributes"]["term"]] = "1";
-//     }
-// };
+$categories = [];
 
-//     print_r($categories);
+foreach($top as $items){
+    $categories[] = $items["category"]["attributes"]["term"];
+}
+
+$eachCategory = array_count_values($categories);
+$maxKey = 0;
+$maxCat = "";
+foreach ($eachCategory as $category => $value) {
+    if($value > $maxKey){
+        $maxKey = $value;
+        $maxCat = $category;
+    };
+};
+
+echo ("$maxCat est la catégorie de film la plus représentée. Elle est présente $maxKey fois. <br>");
+
 
 
     // * Quel est le réalisateur le plus présent dans le top100 ?
@@ -133,6 +141,7 @@ echo ("<br>");
 
 echo ("<br>");
 echo ("<br>");
+echo ("<hr>");
 
 
 foreach($top as $items){
